@@ -1,0 +1,32 @@
+enable
+configure terminal
+
+! Création des VLANs
+vlan 10
+ name Utilisateurs
+vlan 20
+ name Administrateurs
+vlan 30
+ name VoIP
+
+! Affectation des ports aux VLANs
+interface range fa0/1 - 12
+ switchport mode access
+ switchport access vlan 10
+
+interface range fa0/13 - 20
+ switchport mode access
+ switchport access vlan 20
+
+interface range fa0/21 - 24
+ switchport mode access
+ switchport access vlan 30
+
+! Configuration du Trunk entre les switches
+interface fa0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+
+exit
+end
+write memory
