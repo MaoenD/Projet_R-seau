@@ -9,10 +9,12 @@ end
 write memory
 
 
-
-SWITCH CORE 
+SWITCH CORE
 
 conf t
+
+ip routing
+
 vlan 10
 vlan 20
 vlan 30
@@ -33,6 +35,7 @@ vlan 170
 vlan 180
 vlan 190
 vlan 200
+vlan 210
 
 interface vlan 10
    ip address 10.0.1.1/23
@@ -114,30 +117,39 @@ interface vlan 200
    ip address 10.0.38.1/23
 exit
 
+interface vlan 210
+   ip address 10.0.40.1/23
+exit
+
 interface 1/1/1
-   vlan trunk allowed 10-200
-   vlan trunk native 1 # Remplacez 1 par le VLAN natif utilisé, sinon retirez cette ligne
+   switchport mode trunk
+   vlan trunk allowed 10-210
    no shutdown
 exit
 
 interface 1/1/2
-   vlan trunk allowed 10-200
-   vlan trunk native 1
+   switchport mode trunk
+   vlan trunk allowed 10-210
    no shutdown
 exit
 
 interface 1/1/3
-   vlan trunk allowed 10-200
-   vlan trunk native 1
+   switchport mode trunk
+   vlan trunk allowed 10-210
    no shutdown
 exit
 
-ip routing
+router ospf 1
+   router-id 1.1.1.1                 
+   network 10.0.0.0 0.255.255.255 area 0
+exit
 
-write memory
+do write memory
+
 
 
 script routeur
+
 
 
 script acl
