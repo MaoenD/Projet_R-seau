@@ -4,7 +4,7 @@ en
 conf t
 interface <port>
  switchport mode trunk
- switchport trunk allowed vlan 10-200
+ switchport trunk allowed vlan 10-210
 end
 write memory
 
@@ -16,26 +16,89 @@ conf t
 ip routing
 
 vlan 10
+   name RH
+exit
+
 vlan 20
+   name Comptabilite
+exit
+
 vlan 30
+   name Design
+exit
+
 vlan 40
+   name Logistique
+exit
+
 vlan 50
+   name Imprimantes
+exit
+
 vlan 60
+   name Direction
+exit
+
 vlan 70
+   name DSI
+exit
+
 vlan 80
+   name R&D
+exit
+
 vlan 90
+   name Dev
+exit
+
 vlan 100
+   name Data
+exit
+
 vlan 110
+   name Conception
+exit
+
 vlan 120
+   name Invites_WiFi
+exit
+
 vlan 130
+   name Controle_Acces
+exit
+
 vlan 140
+   name Securite_Incendie
+exit
+
 vlan 150
+   name Systeme_Audio
+exit
+
 vlan 160
+   name Gestion_Batiment
+exit
+
 vlan 170
+   name Vide1
+exit
+
 vlan 180
+   name Vide2
+exit
+
 vlan 190
+   name Vide3
+exit
+
 vlan 200
+   name Vide4
+exit
+
 vlan 210
+   name Vide5
+exit
+
 
 interface vlan 10
    ip address 10.0.1.1/23
