@@ -225,6 +225,7 @@ ip access-list extended ACL_VLAN_RH
    permit udp 10.0.1.0 0.0.1.255 any eq 53
    permit tcp 10.0.1.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 445
    permit tcp 10.0.1.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 631
+   permit ip 10.0.1.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 10
@@ -236,6 +237,7 @@ ip access-list extended ACL_VLAN_COMPTABILITE
    permit tcp 10.0.3.0 0.0.1.255 any eq 80
    permit tcp 10.0.3.0 0.0.1.255 any eq 443
    permit udp 10.0.3.0 0.0.1.255 any eq 53
+   permit ip 10.0.3.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 20
@@ -249,6 +251,7 @@ ip access-list extended ACL_VLAN_DESIGN
    permit udp 10.0.5.0 0.0.1.255 any eq 53
    permit tcp 10.0.5.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 445
    permit tcp 10.0.5.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 631
+   permit ip 10.0.5.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 30
@@ -262,6 +265,7 @@ ip access-list extended ACL_VLAN_LOGISTIQUE
    permit udp 10.0.7.0 0.0.1.255 any eq 53
    permit tcp 10.0.7.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 445
    permit tcp 10.0.7.0 0.0.1.255 10.0.9.0 0.0.1.255 eq 631
+   permit ip 10.0.7.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 40
@@ -287,6 +291,7 @@ ip access-list extended ACL_VLAN_DIRECTION
    permit ip 10.0.11.0 0.0.1.255 10.0.1.0 0.0.1.255
    permit ip 10.0.11.0 0.0.1.255 10.0.13.0 0.0.1.255
    permit ip 10.0.11.0 0.0.1.255 10.0.19.0 0.0.1.255
+   permit ip 10.0.11.0 0.0.1.255 10.0.9.0 0.0.1.255
    permit ip any any
    deny ip any any
 exit
@@ -311,14 +316,13 @@ ip access-list extended ACL_VLAN_DSI
    permit udp 10.0.13.0 0.0.1.255 any eq 123      
    permit udp 10.0.13.0 0.0.1.255 any eq 554         
    permit tcp 10.0.13.0 0.0.1.255 any eq 502      
-   permit ip 10.0.13.0 0.0.1.255 any             
+   permit ip 10.0.13.0 0.0.1.255 any
+   permit ip 10.0.13.0 0.0.1.255 10.0.9.0 0.0.1.255           
 exit
 
 interface vlan 70
    ip access-group ACL_VLAN_DSI in
 exit
-
-write memory
 
 
 # VLAN 8: R&D (10.0.15.0/23)
@@ -327,16 +331,43 @@ ip access-list extended ACL_VLAN_R&D
    permit tcp 10.0.15.0 0.0.1.255 any eq 443
    permit udp 10.0.15.0 0.0.1.255 any eq 53
    permit tcp 10.0.15.0 0.0.1.255 any eq 22
+   permit ip 10.0.15.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 80
    ip access-group ACL_VLAN_R&D in
 exit
 
-# VLAN 9: Data (10.0.19.0/23)
+#VLAN 9: DEV (10.0.17.0/23)
+ip access-list extended ACL_VLAN_DEV
+   permit tcp 10.0.17.0 0.0.1.255 any eq 80
+   permit tcp 10.0.17.0 0.0.1.255 any eq 443
+   permit udp 10.0.17.0 0.0.1.255 any eq 53
+   permit tcp 10.0.17.0 0.0.1.255 any eq 445
+   permit tcp 10.0.17.0 0.0.1.255 any eq 631
+   permit tcp 10.0.17.0 0.0.1.255 any eq 3389
+   permit tcp 10.0.17.0 0.0.1.255 any eq 22
+   permit udp 10.0.17.0 0.0.1.255 any eq 161
+   permit udp 10.0.17.0 0.0.1.255 any eq 514
+   permit icmp 10.0.17.0 0.0.1.255 any
+   permit tcp 10.0.17.0 0.0.1.255 any eq 389
+   permit udp 10.0.17.0 0.0.1.255 any eq 1812
+   permit udp 10.0.17.0 0.0.1.255 any eq 123
+   permit udp 10.0.17.0 0.0.1.255 any eq 554
+   permit tcp 10.0.17.0 0.0.1.255 any eq 502
+   permit ip 10.0.17.0 0.0.1.255 10.0.9.0 0.0.1.255
+   permit ip 10.0.17.0 0.0.1.255 any
+   deny ip any any
+exit
+interface vlan 90
+   ip access-group ACL_VLAN_DEV in
+exit
+
+# VLAN 10: Data (10.0.19.0/23)
 ip access-list extended ACL_VLAN_DATA
    permit ip 10.0.19.0 0.0.1.255 10.0.13.0 0.0.1.255
    permit ip 10.0.19.0 0.0.1.255 10.0.15.0 0.0.1.255
+   permit ip 10.0.19.0 0.0.1.255 10.0.9.0 0.0.1.255
    permit ip any any
    deny ip any any
 exit
@@ -344,19 +375,20 @@ interface vlan 100
    ip access-group ACL_VLAN_DATA in
 exit
 
-# VLAN 10: Conception (10.0.21.0/23)
+# VLAN 11: Conception (10.0.21.0/23)
 ip access-list extended ACL_VLAN_CONCEPTION
    permit tcp 10.0.21.0 0.0.1.255 any eq 80
    permit tcp 10.0.21.0 0.0.1.255 any eq 443
    permit udp 10.0.21.0 0.0.1.255 any eq 53
    permit tcp 10.0.21.0 0.0.1.255 any eq 22
+   permit ip 10.0.21.0 0.0.1.255 10.0.9.0 0.0.1.255
    deny ip any any
 exit
 interface vlan 110
    ip access-group ACL_VLAN_CONCEPTION in
 exit
 
-# VLAN 11: Invités Wi-Fi (10.0.23.0/25)
+# VLAN 12: Invités Wi-Fi (10.0.23.0/25)
 ip access-list extended ACL_VLAN_INVITES
    permit tcp 10.0.23.0 0.0.0.127 any eq 80
    permit tcp 10.0.23.0 0.0.0.127 any eq 443
@@ -367,7 +399,7 @@ interface vlan 120
    ip access-group ACL_VLAN_INVITES in
 exit
 
-# VLAN 12: Contrôle d'accès (10.0.25.0/25)
+# VLAN 13: Contrôle d'accès (10.0.25.0/25)
 ip access-list extended ACL_VLAN_CONTROLE_ACCES
    permit tcp 10.0.25.0 0.0.0.127 any eq 80
    permit tcp 10.0.25.0 0.0.0.127 any eq 443
@@ -378,57 +410,52 @@ interface vlan 130
    ip access-group ACL_VLAN_CONTROLE_ACCES in
 exit
 
-# VLAN 13: Sécurité Incendie (10.0.26.0/22)
+# VLAN 14: Sécurité Incendie (10.0.26.0/22)
 ip access-list extended ACL_VLAN_SECURITE_INCENDIE
-   permit udp 10.0.26.0 0.0.3.255 any eq 514       # Syslog
-   permit tcp 10.0.26.0 0.0.3.255 any eq 443       # HTTPS
+   permit udp 10.0.26.0 0.0.3.255 any eq 514 
+   permit tcp 10.0.26.0 0.0.3.255 any eq 443
    deny ip any any
 exit
 interface vlan 140
    ip access-group ACL_VLAN_SECURITE_INCENDIE in
 exit
 
-# VLAN 14: Vidéosurveillance (10.0.36.0/23)
+# VLAN 15: Vidéosurveillance (10.0.36.0/23)
 ip access-list extended ACL_VLAN_VIDEOSURVEILLANCE
-   permit tcp 10.0.36.0 0.0.1.255 any eq 443       # HTTPS
-   permit udp 10.0.36.0 0.0.1.255 any eq 554       # RTSP
-   permit udp 10.0.36.0 0.0.1.255 any eq 514       # Syslog
+   permit tcp 10.0.36.0 0.0.1.255 any eq 443  
+   permit udp 10.0.36.0 0.0.1.255 any eq 554  
+   permit udp 10.0.36.0 0.0.1.255 any eq 514  
    deny ip any any
 exit
 interface vlan 190
    ip access-group ACL_VLAN_VIDEOSURVEILLANCE in
 exit
 
-# VLAN 15: Système Audio (10.0.30.0/27)
+# VLAN 16: Système Audio (10.0.30.0/27)
 ip access-list extended ACL_VLAN_SYSTEME_AUDIO
-   permit tcp 10.0.30.0 0.0.0.31 any eq 443        # HTTPS
-   permit udp 10.0.30.0 0.0.0.31 any eq 514        # Syslog
+   permit tcp 10.0.30.0 0.0.0.31 any eq 443   
+   permit udp 10.0.30.0 0.0.0.31 any eq 514  
    deny ip any any
 exit
 interface vlan 150
    ip access-group ACL_VLAN_SYSTEME_AUDIO in
 exit
 
-# VLAN 16: Gestion Bâtiment (10.0.32.0/23)
+# VLAN 17: Gestion Bâtiment (10.0.32.0/23)
 ip access-list extended ACL_VLAN_GESTION_BATIMENT
-   permit tcp 10.0.32.0 0.0.1.255 any eq 443       # HTTPS
-   permit udp 10.0.32.0 0.0.1.255 any eq 161       # SNMP
-   permit udp 10.0.32.0 0.0.1.255 any eq 123       # NTP
-   permit tcp 10.0.32.0 0.0.1.255 any eq 502       # Modbus/TCP
-   permit tcp 10.0.32.0 0.0.1.255 any eq 47808     # BACnet/IP
+   permit tcp 10.0.32.0 0.0.1.255 any eq 443       
+   permit udp 10.0.32.0 0.0.1.255 any eq 161   
+   permit udp 10.0.32.0 0.0.1.255 any eq 123  
+   permit tcp 10.0.32.0 0.0.1.255 any eq 502  
+   permit tcp 10.0.32.0 0.0.1.255 any eq 47808 
+   permit ip 10.0.32.0 0.0.1.255 10.0.9.0 0.0.1.255
+   permit ip 10.0.32.0 0.0.1.255 10.0.25.0 0.0.0.127
+   permit ip 10.0.32.0 0.0.1.255 10.0.26.0 0.0.3.255
+   permit ip 10.0.32.0 0.0.1.255 10.0.36.0 0.0.1.255
+   permit ip 10.0.32.0 0.0.1.255 10.0.30.0 0.0.0.31
    deny ip any any
-exit
-interface vlan 170
-   ip access-group ACL_VLAN_GESTION_BATIMENT in
 exit
 
-# VLAN 17: VIDÉ (10.0.34.0/23)
-ip access-list extended ACL_VLAN_VIDE_1
-   deny ip any any
-exit
-interface vlan 180
-   ip access-group ACL_VLAN_VIDE_1 in
-exit
 
 # VLAN 18: VIDÉ (10.0.38.0/23)
 ip access-list extended ACL_VLAN_VIDE_2
