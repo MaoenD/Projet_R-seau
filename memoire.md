@@ -98,9 +98,10 @@ Bien que le calcul de bande passante n'ait pas été réalisé en détail, les �
 
 ## Documentation et références
 
-| **Documentation**              | **Lien**                                                                   |
-|--------------------------------|-------------------------------------------------------------------------- |
-| Brochure produits Aruba        | https://www.securewirelessworks.com/JL675A.asp                            |
-| docu switch                    | https://www.hpe.com/psnow/doc/PSN1013152646FR.pdf?jumpid=in_pdp-psnow-dds |
-| docu router                    | https://www.hpe.com/psnow/doc/PSN1009434920FR?jumpid=in_hpesitesearch     |
-| docu wifi                      | https://www.hpe.com/psnow/doc/PSN1013609618FR?jumpid=in_hpesitesearch     |
+| **Documentation**              | **Lien**                                                                                   |
+|--------------------------------|--------------------------------------------------------------------------                  |
+| Schémas logique                | [Lien vers le projet GitHub](https://github.com/MaoenD/Projet_R-seau)                      |
+| Brochure produits Aruba        | [Lien brochure](https://www.securewirelessworks.com/JL675A.asp)                            |
+| docu switch                    | [Lien switches](https://www.hpe.com/psnow/doc/PSN1013152646FR.pdf?jumpid=in_pdp-psnow-dds) |
+| docu router                    | [Lien router](https://www.hpe.com/psnow/doc/PSN1009434920FR?jumpid=in_hpesitesearch)       |
+| docu wifi                      | [Lien wifi](https://www.hpe.com/psnow/doc/PSN1013609618FR?jumpid=in_hpesitesearch)         |
