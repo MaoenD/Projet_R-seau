@@ -148,8 +148,6 @@ Ces chiffres montrent la capacité requise pour chaque étage afin d’assurer l
 
 ---
 
-## Partie 3 : Mise en œuvre et déploiement
-
 ### Choix du matériel
 - **Switchs d’accès : Aruba CX 6100 (24/48 ports)**  
   Avantages : Compatibilité PoE, simplicité de gestion, rapport qualité/prix.  
