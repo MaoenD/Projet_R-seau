@@ -1,106 +1,100 @@
-# # Mémoire sur la gestion des équipements de sécurité et réseaux
-### DORGES Guillaume, LIENARD Mathieu, PICARD Gabriel, NDIAYE Oumou Awa
-### 1er Décembre 
-### YNOV
+# Mémoire : Projet de conception et déploiement d'une infrastructure réseau pour un bâtiment
 
-# Projet de conception et d'implémentation du réseau
+---
 
-## Introduction
+## Partie 1 : Analyse des besoins et cadrage du projet
 
-Ce document présente la conception, les choix techniques, les calculs et les équipements sélectionnés pour un projet réseau visant à connecter 600 utilisateurs, avec une approche structurée et optimisée pour les besoins actuels et futurs de l'organisation.
+### Présentation du bâtiment
+Le projet concerne un bâtiment comprenant 6 étages, un rez-de-chaussée (RDC) et 5 sous-sols, destiné à accueillir 600 utilisateurs avec des équipements connectés variés.
 
-## Dimensionnement des adresses IP
+### Identification des besoins
+Le réseau doit connecter **748 équipements** répartis comme suit :
+- **Sécurité incendie** : 529 équipements
+- **Contrôle d’accès et intrusion** : 89 équipements
+- **Vidéosurveillance** : 22 équipements
+- **VDI** : 21 équipements
+- **GSM** : 87 équipements
 
-### Calcul des besoins en adresses IP
+Pour plus de détails, un tableau détaillé est disponible dans le fichier Google Sheets joint à ce mémoire.
 
-- **Nombre d'utilisateurs** : 600 personnes.
-- **Dispositifs par utilisateur** : 3 appareils (PC, smartphone, tablette).
-- **Total** : 600 × 3 = **1800 appareils connectés**.
-- **Allocation par service** : Environ 100 utilisateurs par service, soit 300 adresses IP par service.
-- **Réseau** :
-  - Pour éviter la saturation, une plage plus large a été choisie.
-  - Utilisation de sous-réseaux en /24 (à 510 adresses utilisables).
+### Exigences techniques
+1. **Éviter les points de défaillance uniques (SPF)** :
+   - Adoption d'une architecture réseau combinant **topologie full mesh** pour les switchs L3 et **topologie circulaire** avec **partial mesh** pour les switchs L2.
+2. **Préparer l'avenir** :
+   - Dimensionner le réseau pour supporter une croissance de 30 %.
+3. **Isolation des VLANs** :
+   - Garantir une sécurité renforcée grâce à une segmentation rigoureuse.
 
-### Tableau de répartition des sous-réseaux
+### Contraintes et enjeux
+L'objectif est de concevoir un réseau performant et évolutif tout en respectant des contraintes budgétaires strictes imposées par le choix exclusif d’un fournisseur.
 
-| **Service**                                | **Sous-réseau** | **CIDR** | **Adresses disponibles** |
-|-------------------------------------------|------------------|----------|--------------------------|
-| RH                                         | 10.0.1.0         | /24      | 510                      |
-| Compatibilité                              | 10.0.2.0         | /24      | 510                      |
-| Design                                     | 10.0.3.0         | /24      | 510                      |
-| Logistique                                 | 10.0.4.0         | /24      | 510                      |
-| Imprimantes                                | 10.0.5.0         | /24      | 510                      |
-| Direction                                  | 10.0.6.0         | /24      | 510                      |
-| DSI                                        | 10.0.7.0         | /24      | 510                      |
-| R&D                                        | 10.0.8.0         | /24      | 510                      |
-| Développement (Dev)                       | 10.0.9.0         | /24      | 510                      |
-| Data                                       | 10.0.10.0        | /24      | 510                      |
-| Conception                                 | 10.0.11.0        | /24      | 510                      |
-| Invités Wi-Fi                              | 10.0.12.0        | /24      | 510                      |
-| Contrôle d’accès                         | 10.0.13.0        | /24      | 510                      |
-| Vidéosurveillance                         | 10.0.14.0        | /24      | 510                      |
-| Gestion bâtiment                          | 10.0.15.0        | /24      | 510                      |
+---
 
-## Choix des équipements
+## Partie 2 : Conception de l'architecture réseau
 
-### Critères de sélection
-Les équipements ont été choisis en fonction des besoins actuels et futurs en termes de performance, fiabilité et budget. Voici les équipements retenus :
+### Choix de l'architecture
+Les schémas détaillant l'architecture sont disponibles dans le projet Git (**Schémas_Physique.drawio** et **Schémas_Logique.io**).
 
-#### Commutateurs (Switchs)
-- Modèle : **Aruba CX 6100** pour les étages et **Aruba CX 6200/6100** pour le sous-sol.
-- Avantages :
-  - Compatible PoE pour alimenter les appareils tels que caméras ou points d'accès Wi-Fi.
-  - Hautes performances pour la gestion du trafic local.
+#### Topologie
+1. **Switchs L3 (core)** : Topologie **full mesh** assurant une redondance maximale.
+2. **Switchs L2 (accès)** : Topologie **circulaire** avec **partial mesh** pour maintenir un équilibre entre coûts et performance.
 
-#### Points d'accès Wi-Fi
-- Modèle : **Aruba AP-635**.
-- Fonctionnalités :
-  - Compatible Wi-Fi 6E pour des performances accrues.
-  - Couverture optimale pour les environnements denses.
+#### Dimensionnement du réseau
+- **Nombre d'équipements par étage** : Voir tableau détaillé en annexe.
+- **Besoins PoE par étage** : Total estimé à **3 670 W**, réparti selon les besoins des dispositifs (bornes Wi-Fi, caméras, etc.).
 
-#### Routeur
-- Modèle : **Aruba 7205**.
-- Justification :
-  - Capacité élevée de gestion du trafic entrant/sortant.
-  - Sécurité et gestion centralisée des connexions.
+### Segmentation VLAN
+La segmentation est conçue pour isoler les flux tout en répondant aux besoins des différents services.
 
-#### Cœur de réseau (Core Switch)
-- Modèle : **Aruba CX 6400**.
-- Rôle :
-  - Gestion des connexions principales.
-  - Assure la redondance et la haute disponibilité.
+| VLAN                         | Subnet IP     | CIDR | Nombre d’adresses | Accès Internet | Accessible autres VLAN | Imprimantes |
+|------------------------------|---------------|------|--------------------|----------------|-------------------------|-------------|
+| RH                           | 10.0.0.0      | /23  | 510                | X              |                         | X           |
+| Comptabilité                 | 10.0.2.0      | /23  | 510                | X              |                         | X           |
+| Direction                    | 10.0.10.0     | /23  | 510                | X              | X                       | X           |
+| Vidéosurveillance            | 10.0.32.0     | /27  | 30                 |                |                         |             |
+| Sécurité incendie            | 10.0.28.0     | /22  | 1022               | X              |                         |             |
+| Gestion bâtiment             | 10.0.34.0     | /23  | 510                | X              | X                       | X           |
 
-### Schéma de connexion des équipements
-Les équipements sont connectés en fonction de leur emplacement (RDC, sous-sol, étages). Le câblage utilise :
-- **Catégorie 6/7** pour les connexions proches.
-- **OM5** pour les connexions longues ou critiques.
+---
 
-## Calculs PoE (Power over Ethernet)
+## Partie 3 : Mise en œuvre et déploiement
 
-Les appareils alimentés par PoE comprennent les caméras de vidéosurveillance, les points d'accès Wi-Fi et certains dispositifs IoT.
+### Besoins en bande passante
+Les besoins sont estimés en fonction des utilisateurs et des flux critiques (sécurité, vidéosurveillance). Exemple :
+- RDC : **172.54 Gbps**
+- Étages 1-6 : Moyenne de **168 Gbps**
 
-### Tableau PoE
-| **Type d'équipement**         | **Nombre par étage** | **Puissance requise (Watts)** |
-|-------------------------------|-----------------------|--------------------------------|
-| Points d'accès Wi-Fi         | 72                    | 15 W                          |
-| Caméras de sécurité         | 50                    | 30 W                          |
-| Contrôle d’accès           | 35                    | 25 W                          |
+### Choix du matériel
+1. **Switchs d’accès (Aruba CX 6100)** :
+   - **Avantages** : Compatibilité PoE, simplicité de gestion.
+   - **Inconvénients** : Limité pour les VLAN complexes.
+2. **Bornes Wi-Fi (Aruba AP-635)** :
+   - **Avantages** : Wi-Fi 6, haute densité.
+   - **Inconvénients** : Coût élevé.
+3. **Switchs core (Aruba CX 6300)** :
+   - **Avantages** : Haute performance, flexibilité.
+   - **Inconvénients** : Consommation énergétique.
 
-### Capacité PoE totale
-La capacité totale des switchs choisis couvre largement les besoins en PoE pour tous les équipements alimentés.
+Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en fin de mémoire.
 
-## Bande passante
+### Access Control Lists (ACL)
+| VLAN          | Protocoles autorisés                                |
+|---------------|-----------------------------------------------------|
+| RH            | HTTP/HTTPS, DNS, SMB/IPP                           |
+| DSI           | HTTP/HTTPS, DNS, SMB/IPP, RDP, SSH, SNMP, Syslog   |
+| Vidéosurveillance | RSTP, HTTPS, Syslog                            |
 
-Bien que le calcul de bande passante n'ait pas été réalisé en détail, les équipements choisis disposent d'une capacité de transfert largement suffisante pour supporter une utilisation intensive par 600 utilisateurs, avec une croissance potentielle de la demande.
-
-- **Switchs** : Jusqu'à 10 Gbps pour la dorsale.
-- **Points d'accès Wi-Fi** : Compatible avec des connexions à haute densité.
+---
 
 ## Documentation et références
 
-| **Documentation**              | **Lien**                                                                   |
-|--------------------------------|-------------------------------------------------------------------------- |
-| Brochure produits Aruba        | https://www.securewirelessworks.com/JL675A.asp                            |
-| docu switch                    | https://www.hpe.com/psnow/doc/PSN1013152646FR.pdf?jumpid=in_pdp-psnow-dds |
-| docu router                    | https://www.hpe.com/psnow/doc/PSN1009434920FR?jumpid=in_hpesitesearch     |
-| docu wifi                      | https://www.hpe.com/psnow/doc/PSN1013609618FR?jumpid=in_hpesitesearch     |
+| **Documentation**              | **Lien**                                                                    |
+|--------------------------------|----------------------------------------------------------------------------|
+| Brochure produits Aruba        | https://www.hpe.com/psnow/doc/a00041557fre                                  |
+| docu switch                    | https://www.hpe.com/psnow/doc/PSN1013152646FRFR.pdf?jumpid=in_pdp-psnow-dds |
+| docu wifi                      | https://www.hpe.com/psnow/doc/PSN1013609618FRFR?jumpid=in_hpesitesearch     |
+
+---
+
+## Conclusion
+Le projet présenté garantit une infrastructure réseau performante, évolutive et sécurisée tout en respectant les contraintes imposées. Les choix techniques sont justifiés par des données chiffrées et une conception solide, appuyée par des documents et visualisations en annexe.
