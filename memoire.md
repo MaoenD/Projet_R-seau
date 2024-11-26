@@ -1,3 +1,8 @@
+# # Mémoire sur la gestion des équipements de sécurité et réseaux
+### DORGES Guillaume, LIENARD Mathieu, PICARD Gabriel, NDIAYE Oumou Awa
+### 1er Décembre 
+### YNOV
+
 # Mémoire : Projet de conception et déploiement d'une infrastructure réseau pour un bâtiment
 
 ---
