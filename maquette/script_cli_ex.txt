@@ -1,7 +1,92 @@
-SWITCH DITRIB
+SWITCH L2
 
 en
 conf t
+vlan 10
+   name RH
+exit
+
+vlan 20
+   name Comptabilite
+exit
+
+vlan 30
+   name Design
+exit
+
+vlan 40
+   name Logistique
+exit
+
+vlan 50
+   name Imprimantes
+exit
+
+vlan 60
+   name Direction
+exit
+
+vlan 70
+   name DSI
+exit
+
+vlan 80
+   name R&D
+exit
+
+vlan 90
+   name Dev
+exit
+
+vlan 100
+   name Data
+exit
+
+vlan 110
+   name Conception
+exit
+
+vlan 120
+   name Invites_WiFi
+exit
+
+vlan 130
+   name Controle_Acces
+exit
+
+vlan 140
+   name Securite_Incendie
+exit
+
+vlan 150
+   name Systeme_Audio
+exit
+
+vlan 160
+   name Gestion_Batiment
+exit
+
+vlan 170
+   name Vide1
+exit
+
+vlan 180
+   name Vide2
+exit
+
+vlan 190
+   name Vide3
+exit
+
+vlan 200
+   name Vide4
+exit
+
+vlan 210
+   name Vide5
+exit
+
+
 interface <port>
  switchport mode trunk
  switchport trunk allowed vlan 10-210
@@ -9,7 +94,12 @@ end
 write memory
 
 
-SWITCH CORE
+
+
+
+
+
+SWITCH L3
 
 conf t
 
@@ -101,51 +191,51 @@ exit
 
 
 interface vlan 10
-   ip address 10.0.1.1/23
+   ip address 10.0.0.1/23
 exit
 
 interface vlan 20
-   ip address 10.0.3.1/23
+   ip address 10.0.2.1/23
 exit
 
 interface vlan 30
-   ip address 10.0.5.1/23
+   ip address 10.0.4.1/23
 exit
 
 interface vlan 40
-   ip address 10.0.7.1/23
+   ip address 10.0.6.1/23
 exit
 
 interface vlan 50
-   ip address 10.0.9.1/23
+   ip address 10.0.8.1/23
 exit
 
 interface vlan 60
-   ip address 10.0.11.1/23
+   ip address 10.0.10.1/23
 exit
 
 interface vlan 70
-   ip address 10.0.13.1/23
+   ip address 10.0.12.1/23
 exit
 
 interface vlan 80
-   ip address 10.0.15.1/23
+   ip address 10.0.14.1/23
 exit
 
 interface vlan 90
-   ip address 10.0.17.1/23
+   ip address 10.0.16.1/23
 exit
 
 interface vlan 100
-   ip address 10.0.19.1/23
+   ip address 10.0.18.1/23
 exit
 
 interface vlan 110
-   ip address 10.0.21.1/23
+   ip address 10.0.20.1/23
 exit
 
 interface vlan 120
-   ip address 10.0.23.1/23
+   ip address 10.0.22.1/23
 exit
 
 interface vlan 130
@@ -153,35 +243,35 @@ interface vlan 130
 exit
 
 interface vlan 140
-   ip address 10.0.26.1/22
+   ip address 10.0.28.1/22
 exit
 
 interface vlan 150
-   ip address 10.0.30.1/27
+   ip address 10.0.32.0/27
 exit
 
 interface vlan 160
-   ip address 10.0.31.1/28
+   ip address 10.0.32.32/28
 exit
 
 interface vlan 170
-   ip address 10.0.32.1/23
-exit
-
-interface vlan 180
    ip address 10.0.34.1/23
 exit
 
-interface vlan 190
+interface vlan 180
    ip address 10.0.36.1/23
 exit
 
-interface vlan 200
+interface vlan 190
    ip address 10.0.38.1/23
 exit
 
-interface vlan 210
+interface vlan 200
    ip address 10.0.40.1/23
+exit
+
+interface vlan 210
+   ip address 10.0.42.1/23
 exit
 
 interface 1/1/1
@@ -202,20 +292,11 @@ interface 1/1/3
    no shutdown
 exit
 
-router ospf 1
-   router-id 1.1.1.1                 
-   network 10.0.0.0 0.255.255.255 area 0
-exit
-
 do write memory
 
 
 
-script routeur
-
-
-
-script acl
+script acl L3
 
 conf t
 # VLAN 1: RH (10.0.1.0/23)
