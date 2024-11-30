@@ -60,6 +60,26 @@ La segmentation est conçue pour isoler les flux tout en répondant aux besoins 
 | Sécurité incendie            | 10.0.28.0     | /22  | 1022               | X              |                         |             |
 | Gestion bâtiment             | 10.0.34.0     | /23  | 510                | X              | X                       | X           |
 
+> **Résumé visuel : VLANs par fonction**
+
+Infrastructure VLAN  
+├── RH  
+│   ├── Plage IP : 10.0.0.0/23  
+│   ├── Protocoles : HTTP/HTTPS, DNS, SMB/IPP  
+├── Comptabilité  
+│   ├── Plage IP : 10.0.2.0/23  
+│   ├── Protocoles : HTTP/HTTPS, DNS, SMB/IPP  
+├── Design  
+│   ├── Plage IP : 10.0.4.0/23  
+│   ├── Protocoles : HTTP/HTTPS, DNS, SMB/IPP  
+├── ...  
+├── Vidéosurveillance  
+│   ├── Plage IP : 10.0.32.0/27  
+│   ├── Protocoles : RTSP, HTTPS, Syslog  
+└── Gestion bâtiment  
+    ├── Plage IP : 10.0.34.0/23  
+    ├── Protocoles : HTTP/HTTPS, SNMP, Syslog, Modbus/TCP  
+
 ---
 
 ## Partie 3 : Mise en œuvre et déploiement
@@ -88,6 +108,26 @@ Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en 
 | RH            | HTTP/HTTPS, DNS, SMB/IPP                           |
 | DSI           | HTTP/HTTPS, DNS, SMB/IPP, RDP, SSH, SNMP, Syslog   |
 | Vidéosurveillance | RSTP, HTTPS, Syslog                            |
+
+
+### Tableau explicatif : Protocoles ACL
+
+| **Protocole**     | **Description concise**                                                                                     |
+|--------------------|-----------------------------------------------------------------------------------------------------------|
+| **HTTP/HTTPS**     | Protocole utilisé pour la communication web, permettant l'accès aux sites et services web sécurisés (HTTPS).|
+| **DNS**            | Système de résolution de noms, traduit les noms de domaine en adresses IP.                                |
+| **SMB/IPP**        | Protocoles pour le partage de fichiers (SMB) et d'impression (IPP) dans un réseau local.                   |
+| **RDP**            | Protocole permettant l'accès distant sécurisé à des ordinateurs ou serveurs.                              |
+| **SSH**            | Protocole sécurisé pour l'administration distante des serveurs et le transfert de fichiers.                |
+| **SNMP**           | Protocole utilisé pour la gestion et la surveillance des équipements réseau.                               |
+| **Syslog**         | Protocole standard pour l'envoi de journaux d'événements vers un serveur central.                          |
+| **ICMP**           | Utilisé pour les diagnostics réseau (exemple : commande *ping*).                                           |
+| **LDAP**           | Protocole pour interroger et modifier des services d'annuaire comme Active Directory.                      |
+| **RADIUS**         | Protocole utilisé pour l'authentification et l'autorisation des utilisateurs réseau.                       |
+| **NTP**            | Synchronisation de l'heure des équipements réseau.                                                        |
+| **RTSP**           | Protocole pour la diffusion de contenu multimédia en temps réel.                                          |
+| **Git**            | Système de contrôle de version pour la gestion de projets de développement.                               |
+| **SQL**            | Protocole utilisé
 
 ---
 
