@@ -7,6 +7,12 @@
 
 ---
 
+## Introduction
+Ce mémoire porte sur la conception et la mise en œuvre d'une infrastructure réseau destinée à équiper un bâtiment comprenant 6 étages, un rez-de-chaussée et 5 sous-sols. L'objectif principal de ce projet est de répondre aux besoins de connectivité de 600 utilisateurs tout en garantissant des performances optimales, une sécurité renforcée et une évolutivité permettant d'intégrer des technologies futures. 
+
+Au fil de ce document, les choix techniques, les dimensions matérielles et les calculs nécessaires seront détaillés afin de démontrer la cohérence et la viabilité de l'architecture réseau proposée. Chaque étape de la conception a été menée avec soin pour répondre aux contraintes spécifiques du bâtiment et aux exigences des différents usages identifiés.
+
+
 ## Partie 1 : Analyse des besoins et cadrage du projet
 
 ### Présentation du bâtiment
@@ -127,7 +133,29 @@ Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en 
 | **NTP**            | Synchronisation de l'heure des équipements réseau.                                                        |
 | **RTSP**           | Protocole pour la diffusion de contenu multimédia en temps réel.                                          |
 | **Git**            | Système de contrôle de version pour la gestion de projets de développement.                               |
-| **SQL**            | Protocole utilisé
+| **SQL**            | Protocole utilisé                                                                                         |
+
+### Devis
+
+| Description                        | Désignation                                                                                 | Référence | Prix unitaire | Quantité | Total         |
+|------------------------------------|---------------------------------------------------------------------------------------------|-----------|---------------|----------|---------------|
+| **Switch cœur de réseau**          | HPE Aruba Networking CX 6300M 24-port SFP+ and 4-port SFP56 Switch                         | JL658A    | €8 038,80     | 3        | €24 116,40    |
+| **Transformateur**                 | HPE Aruba Networking X371 12VDC 250W 100-240VAC Power Supply                               | JL085A    | €262,40       | 3        | €787,20       |
+| **Alimentation**                   | INCLUDED: Power Cord - Europe localization                                                 | JL085A    | incl.         | 3        |               |
+| **Switch de distribution 24 ports**| HPE Aruba Networking CX 6100 24G Class4 PoE 4SFP+ 370W Switch                              | JL677A    | €1 405,20     | 8        | €11 241,60    |
+| **Alimentation**                   | INCLUDED: Power Cord - Europe localization                                                 | JL677A    | incl.         | 8        |               |
+| **Switch de distribution 48 ports**| HPE Aruba Networking CX 6100 48G Class4 PoE 4SFP+ 740W Switch                              | R9Y04A    | €3 214,80     | 19       | €61 081,20    |
+| **Alimentation**                   | INCLUDED: Power Cord - Europe localization                                                 | R9Y04A    | incl.         | 19       |               |
+| **Borne WI-FI 6E**                 | HPE Aruba Networking AP-635 (RW) Tri-radio 2x2 802.11ax Wi-Fi 6E Internal Antennas Campus AP| R7J27A    | €632,80       | 87       | €55 053,60    |
+| **Licence borne Wi-fi**            | Aruba 3Y FC NBD Exch AP-635 SVC  [for R7J27A]                                              | H29YFE    | €77,60        | 87       | €6 751,20     |
+| **Licence switch 48 ports**        | Aruba 3Y FC NBD Exch 6100 48G CL4 4SFP+ 740W SVC  [for R9Y04A]                             | H83A5E    | €479,60       | 19       | €9 112,40     |
+| **Licence switch 24 ports**        | Aruba 3Y FC NBD Exch 6100 24G CL4 SVC  [for JL677A]                                        | HV1M2E    | €201,60       | 8        | €1 612,80     |
+| **Licence switch cœur de réseau**  | Aruba 3Y FC NBD Exch 6300M 24SFP SVC  [for JL658A]                                         | HR4C2E    | €1 024,80     | 3        | €3 074,40     |
+| **Configuration switch de distribution**| configuration switch L2                                                                 |           | €60,00        | 10:40:00 | €640,00       |
+| **Configuration switch cœur de réseau**| configuration switch L3                                                                 |           | €60,00        | 07:00:00 | €420,00       |
+| **Service supplémentaire**         | HPE Aruba Networking Central AP Foundation 5-year Subscription E-STU                      | Q9Y60AAE  | €189,20       | 117      | €22 136,40    |
+|                                    |                                                                                             |           |               |          | **€196 027,20** |
+
 
 ---
 
@@ -136,8 +164,11 @@ Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en 
 | **Documentation**              | **Lien**                                                                    |
 |--------------------------------|----------------------------------------------------------------------------|
 | Brochure produits Aruba        | https://www.hpe.com/psnow/doc/a00041557fre                                  |
-| docu switch                    | https://www.hpe.com/psnow/doc/PSN1013152646FRFR.pdf?jumpid=in_pdp-psnow-dds |
+| Switch core                    | https://www.hpe.com/psnow/doc/a00085162enw |
 | docu wifi                      | https://www.hpe.com/psnow/doc/PSN1013609618FRFR?jumpid=in_hpesitesearch     |
+| switch 48 ports                | https://www.hpe.com/psnow/doc/PSN1013152646FRFR.pdf?jumpid=in_pdp-psnow-dds |
+| switch 24 ports                | https://www.hpe.com/psnow/doc/PSN1013152645WWEN.pdf?jumpid=in_pdp-psnow-dds |
+
 
 ---
 
