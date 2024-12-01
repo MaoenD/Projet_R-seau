@@ -87,7 +87,20 @@ Les schémas détaillant l'architecture sont disponibles dans le projet Git (**S
 2. **Switchs L2 (accès)** : Topologie **circulaire** avec **partial mesh** pour maintenir un équilibre entre coûts et performance.
 
 #### Dimensionnement du réseau
-- **Nombre d'équipements par étage** : Voir tableau détaillé en annexe.
+
+- **Calcul des besoins en équipements
+
+Dans le cadre de la conception de l'infrastructure réseau, les besoins en équipements ont été identifiés pour répondre aux contraintes du bâtiment et aux exigences des utilisateurs. Voici le détail des équipements nécessaires :
+
+| Équipement           | Quantité requise |
+|-----------------------|------------------|
+| **Bornes Wi-Fi**      | 87               |
+| **Switch cœur de réseau** | 2                |
+| **Switch 24 ports**   | 8                |
+| **Switch 48 ports**   | 19               |
+
+Ces équipements permettront de garantir une couverture réseau efficace et une gestion optimale du trafic, en répondant aux besoins de connectivité pour les 600 utilisateurs prévus dans le bâtiment. Le dimensionnement des équipements tient compte des contraintes d'évolutivité, de redondance et de performances attendues.
+
 - **Besoins PoE par étage** : Total estimé à **3 670 W**, réparti selon les besoins des dispositifs (bornes Wi-Fi, caméras, etc.).
 
 ### Segmentation VLAN
@@ -122,6 +135,8 @@ Infrastructure VLAN
     ├── Plage IP : 10.0.34.0/23  
     ├── Protocoles : HTTP/HTTPS, SNMP, Syslog, Modbus/TCP  
 
+Dans le fichier Travail_Préparatoire.xlsx se trouve tout le détail de la répartition IP
+
 ---
 
 ## Partie 3 : Mise en œuvre et déploiement
@@ -145,6 +160,9 @@ Les besoins sont estimés en fonction des utilisateurs et des flux critiques (s�
 Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en fin de mémoire.
 
 ### Access Control Lists (ACL)
+
+Ceci est un échantillon des protocoles autorisé selon les VLAN (cf Travail_Préparatoire.xlsx)
+
 | VLAN          | Protocoles autorisés                                |
 |---------------|-----------------------------------------------------|
 | RH            | HTTP/HTTPS, DNS, SMB/IPP                           |
