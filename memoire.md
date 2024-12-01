@@ -164,43 +164,44 @@ Les besoins sont estimés en fonction des utilisateurs et des flux critiques (s�
 - RDC : **172.54 Gbps**
 - Étages 1-6 : Moyenne de **168 Gbps**
 
-### Choix du matériel
+### Sélection des équipements
 
-#### 1. **Switchs d’accès : Aruba CX 6100**
-Les switchs d’accès Aruba CX 6100 ont été choisis pour répondre aux besoins des étages et sous-sols, avec un accent sur la connectivité des équipements de niveau d’accès (ordinateurs, imprimantes, dispositifs de sécurité).
+#### 1. **Switchs d’accès : Aruba CX 6100 24 et 48 ports**
+Les switchs Aruba CX 6100 ont été retenus pour équiper les étages et sous-sols, en s’assurant de connecter efficacement les dispositifs tels que postes de travail, imprimantes et équipements de sécurité.
 
-- **Avantages** :
-  - **Compatibilité PoE** : Ces switchs sont compatibles avec les normes PoE/PoE+ (802.3af/802.3at), ce qui permet d’alimenter directement les équipements connectés comme les bornes Wi-Fi, caméras ou téléphones IP sans avoir besoin d’une alimentation externe.
-  - **Simplicité de gestion** : Ils sont équipés du système d’exploitation AOS-CX, reconnu pour son interface conviviale et ses fonctionnalités modernes (comme la gestion via interface web ou API).
-  - **Coût abordable** : Bien que performants, ces switchs sont positionnés sur un segment économique, ce qui permet de respecter les contraintes budgétaires du projet.
+- **Points forts** :
+  - **Support PoE** : Ces modèles intègrent les normes PoE/PoE+ (802.3af/802.3at), permettant d’alimenter directement des équipements comme des caméras, téléphones IP ou points d’accès sans fil, sans alimentation supplémentaire.
+  - **Facilité d’utilisation** : Dotés du système AOS-CX, ces switchs offrent une interface moderne et intuitive, que ce soit via une console web ou des API.
+  - **Rapport qualité-prix** : Ils se positionnent comme une solution économique, idéale pour respecter les contraintes budgétaires.
 
-- **Inconvénients** :
-  - **Limitations pour les VLAN complexes** : Les Aruba CX 6100 offrent des fonctionnalités VLAN suffisantes pour les configurations de base, mais peuvent manquer de capacités avancées pour des environnements nécessitant une gestion complexe des politiques VLAN interconnectées.
-  - **Absence de modularité** : Contrairement à des modèles haut de gamme, ils ne disposent pas de slots d’expansion, limitant leur évolutivité.
+- **Limites** :
+  - **Capacités VLAN** : Bien adaptés pour des besoins standards, ils peuvent ne pas répondre à des configurations réseau nécessitant des politiques VLAN complexes.
+  - **Évolutivité limitée** : Contrairement aux modèles haut de gamme, ces switchs ne permettent pas l’ajout de modules d’expansion.
 
-#### 2. **Bornes Wi-Fi : Aruba AP-635**
-Les bornes Wi-Fi Aruba AP-635 sont choisies pour couvrir les besoins sans fil du bâtiment, notamment pour les utilisateurs mobiles et les objets connectés.
+#### 2. **Points d’accès Wi-Fi : Aruba AP-635**
+Les points d’accès Aruba AP-635 ont été choisis pour assurer une connectivité sans fil performante, en tenant compte des utilisateurs mobiles et des objets connectés.
 
-- **Avantages** :
-  - **Support du Wi-Fi 6E** : Ces bornes exploitent les fréquences du Wi-Fi 6E, offrant des performances accrues, une latence réduite et une meilleure gestion des environnements à haute densité. Cela garantit une connectivité fluide pour les 600 utilisateurs du bâtiment et leurs appareils.
-  - **Haute densité** : Les Aruba AP-635 sont conçues pour gérer un grand nombre de connexions simultanées, ce qui est crucial dans des zones très peuplées comme les étages de bureaux.
-  - **Gestion centralisée** : Elles sont compatibles avec Aruba Central, permettant une gestion centralisée et une surveillance en temps réel.
+- **Points forts** :
+  - **Wi-Fi 6E** : En utilisant les fréquences supplémentaires du Wi-Fi 6E, ces bornes offrent une meilleure gestion des connexions dans des environnements densément peuplés et une faible latence.
+  - **Capacité multi-utilisateurs** : Ces bornes sont conçues pour supporter un grand nombre de connexions simultanées, un atout essentiel dans des zones de forte affluence comme les bureaux.
+  - **Gestion centralisée** : La compatibilité avec Aruba Central permet une supervision simplifiée et en temps réel.
 
-- **Inconvénients** :
-  - **Coût élevé** : Les bornes Wi-Fi 6E sont plus onéreuses que les modèles de générations précédentes, ce qui représente un investissement important.
-  - **Consommation énergétique** : Chaque borne nécessite environ 25.5 W, ce qui peut nécessiter une gestion rigoureuse des besoins PoE.
+- **Limites** :
+  - **Prix** : Ces bornes représentent un investissement significatif en comparaison avec des modèles plus anciens.
+  - **Besoins énergétiques** : Leur consommation (environ 25.5 W par unité) peut nécessiter une planification rigoureuse des ressources PoE.
 
-#### 3. **Switchs core : Aruba CX 6300**
-Les switchs core Aruba CX 6300 sont le cœur de l’architecture réseau, assurant la distribution et l’interconnexion des flux critiques entre les différents étages et services.
+#### 3. **Switchs core : Aruba CX 6300M**
+Les Aruba CX 6300 jouent un rôle clé dans l’infrastructure, en assurant la distribution et la communication entre les différents étages et services.
 
-- **Avantages** :
-  - **Haute performance** : Ces switchs offrent une grande capacité de commutation (jusqu’à 880 Gbps) et une faible latence, garantissant une fluidité des communications entre les VLANs.
-  - **Flexibilité** : Leur modularité permet d’ajouter des cartes supplémentaires pour augmenter les ports disponibles ou les capacités en uplink (par exemple, des ports 25/40/100 Gbps).
-  - **Gestion avancée des VLANs** : Les Aruba CX 6300 supportent des fonctionnalités avancées comme le routage inter-VLAN, le stacking virtuel (VSF), et une sécurité renforcée grâce aux ACLs.
+- **Points forts** :
+  - **Performance élevée** : Avec une capacité de commutation allant jusqu’à 880 Gbps, ces switchs garantissent un trafic fluide et une interconnexion rapide entre les VLANs.
+  - **Modularité** : Ils permettent d’ajouter des modules pour augmenter le nombre de ports ou intégrer des connexions rapides (25/40/100 Gbps).
+  - **Fonctionnalités avancées** : Ces switchs prennent en charge le routage inter-VLAN, le stacking virtuel et des options de sécurité comme les ACLs.
 
-- **Inconvénients** :
-  - **Consommation énergétique** : Ces switchs, bien que performants, consomment davantage d’énergie, ce qui peut représenter un coût opérationnel supplémentaire.
-  - **Coût initial élevé** : Leur performance et modularité se traduisent par un prix supérieur aux switchs standards, mais cela est justifié pour un rôle central dans l’architecture.
+- **Limites** :
+  - **Consommation d’énergie** : En raison de leurs performances, ils nécessitent plus d’énergie, ce qui peut entraîner des coûts supplémentaires d’exploitation.
+  - **Coût initial** : Leur prix est supérieur à celui des switchs d’accès, mais cette dépense est justifiée par leur rôle central dans l’architecture.
+
 
 ---
 
