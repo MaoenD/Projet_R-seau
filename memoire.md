@@ -176,4 +176,10 @@ Dans ce tableau nous avons aussi inclus un service, le Aruba Network Central qui
 ---
 
 ## Conclusion
-Le projet présenté garantit une infrastructure réseau performante, évolutive et sécurisée tout en respectant les contraintes imposées. Les choix techniques sont justifiés par des données chiffrées et une conception solide, appuyée par des documents et visualisations en annexe.
+# Conclusion
+
+Ce projet a permis de concevoir et de mettre en place une infrastructure réseau solide, sécurisée et capable d’évoluer dans le temps. Conçue pour répondre aux besoins spécifiques de 600 utilisateurs et pour connecter 748 équipements, cette solution a été élaborée en tenant compte des contraintes propres au bâtiment. La mise en place des VLANs, des règles ACL et d’une topologie pensée pour la redondance garantit une organisation efficace et une fiabilité optimale.
+
+Les équipements sélectionnés, comme les switchs Aruba CX 6100 et CX 6300 ainsi que les bornes Wi-Fi Aruba AP-635, ont été choisis pour leur performance, leur simplicité de gestion et leur capacité à répondre aux exigences techniques en matière de puissance PoE et de bande passante. Une attention particulière a été portée à l’organisation des flux entre les différentes sections du réseau et à l’adressage IP afin d’assurer un fonctionnement optimal.
+
+Grâce à une planification soignée et à l’utilisation de technologies modernes, cette infrastructure est non seulement adaptée aux besoins actuels mais également conçue pour supporter une augmentation significative du nombre d’utilisateurs et de dispositifs connectés. Elle offre une solution performante et flexible, capable de s’adapter aux évolutions futures.
