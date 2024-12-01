@@ -88,7 +88,7 @@ Les schémas détaillant l'architecture sont disponibles dans le projet Git (**S
 
 #### Dimensionnement du réseau
 
-- **Calcul des besoins en équipements
+- **Calcul des besoins en équipements**
 
 Dans le cadre de la conception de l'infrastructure réseau, les besoins en équipements ont été identifiés pour répondre aux contraintes du bâtiment et aux exigences des utilisateurs. Voici le détail des équipements nécessaires :
 
