@@ -101,10 +101,28 @@ Dans le cadre de la conception de l'infrastructure réseau, les besoins en équi
 
 Ces équipements permettront de garantir une couverture réseau efficace et une gestion optimale du trafic, en répondant aux besoins de connectivité pour les 600 utilisateurs prévus dans le bâtiment. Le dimensionnement des équipements tient compte des contraintes d'évolutivité, de redondance et de performances attendues.
 
-- **Besoins PoE par étage** : Total estimé à **3 670 W**, réparti selon les besoins des dispositifs (bornes Wi-Fi, caméras, etc.).
+- **Besoins PoE total** : Total estimé à **3 670 W**, réparti selon les besoins des dispositifs (bornes Wi-Fi, caméras, etc.).
 
 ### Segmentation VLAN
-La segmentation est conçue pour isoler les flux tout en répondant aux besoins des différents services.
+
+- **Justification du choix d’une adresse IP de classe A**
+
+1. **Grande capacité d’adressage** :
+   - Une adresse IP de classe A permet de gérer un nombre très important d’hôtes dans un réseau. Avec une plage d’adresses allant de `10.0.0.0` à `10.255.255.255` (dans le cas d’un réseau privé), cette classe offre une possibilité d’adressage allant jusqu’à 16 millions d’adresses. Ce choix est idéal pour les projets de grande ampleur comme celui-ci, nécessitant une capacité d’adaptation.
+
+2. **Flexibilité pour la segmentation** :
+   - Les adresses de classe A permettent une segmentation efficace à l’aide de sous-réseaux adaptés à chaque VLAN (par exemple : /23 pour 510 adresses ou /27 pour 30 adresses). Cela facilite la gestion des sous-réseaux et garantit une répartition des adresses adaptée aux besoins spécifiques.
+
+3. **Anticipation de la croissance** :
+   - Le projet prévoit une augmentation de 30 % des équipements connectés dans les années à venir. Avec la classe A, il sera possible d’ajouter de nombreux sous-réseaux sans risquer de manquer d’adresses disponibles.
+
+4. **Compatibilité avec les normes** :
+   - La plage d’adresses IP privées définie par la RFC 1918 inclut `10.0.0.0/8` pour la classe A, ce qui assure que ces adresses ne causeront pas de conflit avec les adresses publiques.
+
+5. **Simplicité et cohérence** :
+   - L’utilisation d’une seule classe A permet de simplifier l’administration et la documentation du réseau. Cela favorise une cohérence dans la gestion des VLANs et des règles de sécurité.
+
+- **La segmentation est conçue pour isoler les flux tout en répondant aux besoins des différents services.**
 
 | VLAN                         | Subnet IP     | CIDR | Nombre d’adresses | Accès Internet | Accessible autres VLAN | Imprimantes |
 |------------------------------|---------------|------|--------------------|----------------|-------------------------|-------------|
@@ -147,15 +165,48 @@ Les besoins sont estimés en fonction des utilisateurs et des flux critiques (s�
 - Étages 1-6 : Moyenne de **168 Gbps**
 
 ### Choix du matériel
-1. **Switchs d’accès (Aruba CX 6100)** :
-   - **Avantages** : Compatibilité PoE, simplicité de gestion.
-   - **Inconvénients** : Limité pour les VLAN complexes.
-2. **Bornes Wi-Fi (Aruba AP-635)** :
-   - **Avantages** : Wi-Fi 6, haute densité.
-   - **Inconvénients** : Coût élevé.
-3. **Switchs core (Aruba CX 6300)** :
-   - **Avantages** : Haute performance, flexibilité.
-   - **Inconvénients** : Consommation énergétique.
+
+#### 1. **Switchs d’accès : Aruba CX 6100**
+Les switchs d’accès Aruba CX 6100 ont été choisis pour répondre aux besoins des étages et sous-sols, avec un accent sur la connectivité des équipements de niveau d’accès (ordinateurs, imprimantes, dispositifs de sécurité).
+
+- **Avantages** :
+  - **Compatibilité PoE** : Ces switchs sont compatibles avec les normes PoE/PoE+ (802.3af/802.3at), ce qui permet d’alimenter directement les équipements connectés comme les bornes Wi-Fi, caméras ou téléphones IP sans avoir besoin d’une alimentation externe.
+  - **Simplicité de gestion** : Ils sont équipés du système d’exploitation AOS-CX, reconnu pour son interface conviviale et ses fonctionnalités modernes (comme la gestion via interface web ou API).
+  - **Coût abordable** : Bien que performants, ces switchs sont positionnés sur un segment économique, ce qui permet de respecter les contraintes budgétaires du projet.
+
+- **Inconvénients** :
+  - **Limitations pour les VLAN complexes** : Les Aruba CX 6100 offrent des fonctionnalités VLAN suffisantes pour les configurations de base, mais peuvent manquer de capacités avancées pour des environnements nécessitant une gestion complexe des politiques VLAN interconnectées.
+  - **Absence de modularité** : Contrairement à des modèles haut de gamme, ils ne disposent pas de slots d’expansion, limitant leur évolutivité.
+
+#### 2. **Bornes Wi-Fi : Aruba AP-635**
+Les bornes Wi-Fi Aruba AP-635 sont choisies pour couvrir les besoins sans fil du bâtiment, notamment pour les utilisateurs mobiles et les objets connectés.
+
+- **Avantages** :
+  - **Support du Wi-Fi 6E** : Ces bornes exploitent les fréquences du Wi-Fi 6E, offrant des performances accrues, une latence réduite et une meilleure gestion des environnements à haute densité. Cela garantit une connectivité fluide pour les 600 utilisateurs du bâtiment et leurs appareils.
+  - **Haute densité** : Les Aruba AP-635 sont conçues pour gérer un grand nombre de connexions simultanées, ce qui est crucial dans des zones très peuplées comme les étages de bureaux.
+  - **Gestion centralisée** : Elles sont compatibles avec Aruba Central, permettant une gestion centralisée et une surveillance en temps réel.
+
+- **Inconvénients** :
+  - **Coût élevé** : Les bornes Wi-Fi 6E sont plus onéreuses que les modèles de générations précédentes, ce qui représente un investissement important.
+  - **Consommation énergétique** : Chaque borne nécessite environ 25.5 W, ce qui peut nécessiter une gestion rigoureuse des besoins PoE.
+
+#### 3. **Switchs core : Aruba CX 6300**
+Les switchs core Aruba CX 6300 sont le cœur de l’architecture réseau, assurant la distribution et l’interconnexion des flux critiques entre les différents étages et services.
+
+- **Avantages** :
+  - **Haute performance** : Ces switchs offrent une grande capacité de commutation (jusqu’à 880 Gbps) et une faible latence, garantissant une fluidité des communications entre les VLANs.
+  - **Flexibilité** : Leur modularité permet d’ajouter des cartes supplémentaires pour augmenter les ports disponibles ou les capacités en uplink (par exemple, des ports 25/40/100 Gbps).
+  - **Gestion avancée des VLANs** : Les Aruba CX 6300 supportent des fonctionnalités avancées comme le routage inter-VLAN, le stacking virtuel (VSF), et une sécurité renforcée grâce aux ACLs.
+
+- **Inconvénients** :
+  - **Consommation énergétique** : Ces switchs, bien que performants, consomment davantage d’énergie, ce qui peut représenter un coût opérationnel supplémentaire.
+  - **Coût initial élevé** : Leur performance et modularité se traduisent par un prix supérieur aux switchs standards, mais cela est justifié pour un rôle central dans l’architecture.
+
+---
+
+### Conclusion
+Le choix du matériel repose sur un compromis entre performances, évolutivité, et contraintes budgétaires. Les Aruba CX 6100 et CX 6300 assurent respectivement les besoins d’accès et de cœur de réseau, tandis que les bornes Aruba AP-635 offrent une solution sans fil de dernière génération adaptée aux exigences actuelles et futures du projet. Les datasheets sont disponibles en annexe pour plus de détails techniques.
+
 
 Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en fin de mémoire.
 
