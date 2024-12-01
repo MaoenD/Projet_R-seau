@@ -154,7 +154,9 @@ Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en 
 | **Configuration switch de distribution**| configuration switch L2                                                                 |           | €60,00        | 10:40:00 | €640,00       |
 | **Configuration switch cœur de réseau**| configuration switch L3                                                                 |           | €60,00        | 07:00:00 | €420,00       |
 | **Service supplémentaire**         | HPE Aruba Networking Central AP Foundation 5-year Subscription E-STU                      | Q9Y60AAE  | €189,20       | 117      | €22 136,40    |
-|                                    |                                                                                             |           |               |          | **€196 027,20** |
+|                                    |                                                                                             |           |               |   TOTAL       | **€196 027,20** |
+
+Dans ce tableau nous avons aussi inclus un service, le Aruba Network Central qui est une solution réseau basée sur le cloud qui unifie la gestion des infrastructures sans fil, filaires et WAN à travers divers environnements, tels que les campus, les succursales, les centres de données et les sites distants. Elle intègre des fonctionnalités d'analyse et d'alertes intelligentes guidées par l'IA, offrant des informations exploitables pour surveiller, dépanner et améliorer proactivement les performances du réseau.
 
 
 ---
@@ -168,6 +170,7 @@ Les fiches techniques (datasheets) sont en annexe, et les liens sont fournis en 
 | docu wifi                      | https://www.hpe.com/psnow/doc/PSN1013609618FRFR?jumpid=in_hpesitesearch     |
 | switch 48 ports                | https://www.hpe.com/psnow/doc/PSN1013152646FRFR.pdf?jumpid=in_pdp-psnow-dds |
 | switch 24 ports                | https://www.hpe.com/psnow/doc/PSN1013152645WWEN.pdf?jumpid=in_pdp-psnow-dds |
+| Aruba Networking Central       | https://www.hpe.com/psnow/doc/c05272678.pdf?jumpid=in_pdp-psnow-qs          |
 
 
 ---
