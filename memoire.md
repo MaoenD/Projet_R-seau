@@ -8,25 +8,25 @@
 ---
 
 ## Introduction
-Ce mémoire porte sur la conception et la mise en œuvre d'une infrastructure réseau destinée à équiper un bâtiment comprenant 6 étages, un rez-de-chaussée et 5 sous-sols. L'objectif principal de ce projet est de répondre aux besoins de connectivité de 600 utilisateurs tout en garantissant des performances optimales, une sécurité renforcée et une évolutivité permettant d'intégrer des technologies futures. 
+Ce travail porte sur la planification et la mise en place d’une infrastructure réseau adaptée à un bâtiment composé de 6 étages, un rez-de-chaussée et 5 sous-sols. L’objectif est de fournir une connectivité efficace pour environ 600 utilisateurs, tout en assurant des performances fiables, un haut niveau de sécurité et une capacité à évoluer en fonction des technologies à venir.
 
-Au fil de ce document, les choix techniques, les dimensions matérielles et les calculs nécessaires seront détaillés afin de démontrer la cohérence et la viabilité de l'architecture réseau proposée. Chaque étape de la conception a été menée avec soin pour répondre aux contraintes spécifiques du bâtiment et aux exigences des différents usages identifiés.
+Le document explore les choix techniques retenus, les dimensions des équipements, ainsi que les calculs effectués pour garantir une architecture réseau cohérente et viable. Chaque décision a été prise en tenant compte des contraintes spécifiques du bâtiment et des besoins variés des utilisateurs identifiés, afin de concevoir une solution robuste et adaptée.
 
 
 ## Partie 1 : Analyse des besoins et cadrage du projet
 
 ### Présentation du bâtiment
-Le projet concerne un bâtiment comprenant 6 étages, un rez-de-chaussée (RDC) et 5 sous-sols, destiné à accueillir 600 utilisateurs avec des équipements connectés variés.
+Le projet concerne un bâtiment comprenant 6 étages, un rez-de-chaussée (RDC) et 5 sous-sols, destiné à accueillir 600 utilisateurs avec des équipements connectés variés (à raison de 3 par personne).
 
 ### Identification des besoins
-Le réseau doit connecter **748 équipements** répartis comme suit :
+Le réseau doit pouvoir connecter **748 équipements** répartis comme suit :
 - **Sécurité incendie** : 529 équipements
 - **Contrôle d’accès et intrusion** : 89 équipements
 - **Vidéosurveillance** : 22 équipements
 - **VDI** : 21 équipements
 - **GSM** : 87 équipements
 
-Pour plus de détails, un tableau détaillé est disponible dans le fichier Google Sheets joint à ce mémoire.
+Pour plus de détails, un tableau est disponible dans le fichier Travail_Préparatoire.xlsx joint à ce mémoire.
 
 ### Exigences techniques
 1. **Éviter les points de défaillance uniques (SPF)** :
@@ -36,8 +36,44 @@ Pour plus de détails, un tableau détaillé est disponible dans le fichier Goog
 3. **Isolation des VLANs** :
    - Garantir une sécurité renforcée grâce à une segmentation rigoureuse.
 
-### Contraintes et enjeux
-L'objectif est de concevoir un réseau performant et évolutif tout en respectant des contraintes budgétaires strictes imposées par le choix exclusif d’un fournisseur.
+### Contraintes et défis
+
+Le projet vise à concevoir un réseau à la fois fiable, adaptable et capable de répondre aux besoins futurs de l'organisation. Toutefois, plusieurs limites doivent être prises en compte :
+
+---
+
+#### **1. Limites budgétaires**
+- **Dépendance à un fournisseur unique** : Le recours exclusif aux équipements HPE Aruba Networking impose un cadre spécifique. Bien que cette solution assure une bonne compatibilité entre les éléments du réseau, elle restreint les options pour réduire les coûts.
+- **Gestion optimale des ressources** : Il est crucial d’allouer efficacement les fonds disponibles pour garantir le meilleur équilibre entre coût et performance.
+
+---
+
+#### **2. Exigences de performance et d’évolution**
+- **Croissance prévue du réseau** : Le système doit gérer un grand volume de connexions dès sa mise en service (jusqu’à 3 000 appareils), avec la possibilité d’absorber une augmentation de 30 % à moyen terme.
+- **Débits nécessaires** : Les besoins en bande passante augmentent en raison d’applications telles que la vidéosurveillance en haute définition ou le Wi-Fi 6E, qui requièrent des transferts rapides et fluides.
+- **Adaptabilité** : La conception doit permettre l’ajout progressif de nouveaux équipements (par exemple, bornes Wi-Fi ou VLAN) sans modifications majeures.
+
+---
+
+#### **3. Fiabilité et disponibilité**
+- **Continuité de service** : Les services essentiels, comme le contrôle d’accès ou la vidéosurveillance, ne doivent pas être interrompus, exigeant une infrastructure résiliente.
+- **Solutions redondantes** : Pour éviter les interruptions dues à des pannes, des équipements et connexions redondants doivent être prévus.
+- **Facilité de maintenance** : L’ensemble doit rester simple à gérer et à dépanner afin de limiter les temps d’indisponibilité.
+
+---
+
+#### **4. Sécurité et normes**
+- **Isolation des données** : La segmentation via des VLAN permet de sécuriser les échanges entre différents services (bureaux, systèmes de contrôle, etc.).
+- **Renforcement des protections** : Des solutions comme les ACL limitent les risques d’accès non autorisés.
+
+---
+
+#### **5. Déploiement et compétences**
+- **Respect des délais** : Le réseau doit être opérationnel dans le temps imparti, en respectant les étapes prévues.
+
+---
+
+En somme, le réseau doit concilier efficacité, évolutivité et respect du budget, tout en répondant aux attentes actuelles et futures de l’organisation.
 
 ---
 
